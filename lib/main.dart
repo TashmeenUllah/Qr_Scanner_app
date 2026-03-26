@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:qr_code_reader/routes/approutes.dart';
 import 'package:qr_code_reader/views/home/home.dart';
-import 'package:qr_code_reader/views/splash/splashscreen.dart';
-
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init(); // initialize local storage
@@ -14,7 +12,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown, 
   ]);
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {

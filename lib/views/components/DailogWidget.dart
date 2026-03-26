@@ -23,7 +23,7 @@ class QRResultDialog extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.4),
+                color: Colors.black.withValues(alpha: 0.4),
                 blurRadius: 15,
                 offset: const Offset(0, 6),
               ),
@@ -63,7 +63,7 @@ class QRResultDialog extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: const Color(0xff203a43),
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.greenAccent.withOpacity(0.5), width: 1),
+                      border: Border.all(color: Colors.greenAccent.withValues(alpha: 0.5), width: 1),
                     ),
                     child: SingleChildScrollView(
                       child: SelectableText(

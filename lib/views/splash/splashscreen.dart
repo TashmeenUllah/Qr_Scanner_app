@@ -171,12 +171,10 @@ import 'package:qr_code_reader/viewmodels/splash_viewmodel.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     final vm = Get.put(WelcomeViewModel());
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       backgroundColor: const Color(0xff203a43), // ✅ your app color
       body: Stack(
@@ -188,14 +186,13 @@ class WelcomeScreen extends StatelessWidget {
               gradient: LinearGradient(
                 colors: [
                   const Color(0xff203a43),
-                  Colors.blueGrey.shade900.withOpacity(0.9),
+                  Colors.blueGrey.shade900.withValues(alpha: 0.9),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
             ),
           ),
-
           // Center content
           Center(
             child: FadeTransition(
@@ -212,7 +209,7 @@ class WelcomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(25),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.6),
+                          color: Colors.black.withValues(alpha: 0.6),
                           blurRadius: 25,
                           offset: const Offset(0, 15),
                         ),
@@ -230,16 +227,14 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 30),
-
                   // App title
                   Text(
                     'QR Scanner',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Colors.greenAccent.withOpacity(0.8),
+                      color: Colors.greenAccent.withValues(alpha: 0.8),
                       letterSpacing: 1.2,
                       shadows: const [
                         Shadow(
@@ -251,7 +246,6 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-
                   // Subtitle
                   const Text(
                     'Smart, fast, and effortless QR management',
@@ -262,18 +256,17 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40),
-
                   // Start button (modern)
                   ElevatedButton(
                     onPressed: vm.navigateToScanner,
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 60),
-                      backgroundColor: Colors.greenAccent.withOpacity(0.8),
+                      backgroundColor: Colors.greenAccent.withValues(alpha: 0.8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(35),
                       ),
                       elevation: 10,
-                      shadowColor: Colors.greenAccent.withOpacity(0.8),
+                      shadowColor: Colors.greenAccent.withValues(alpha: 0.8),
                     ),
                     child: const Text(
                       'Start Scanning',

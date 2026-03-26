@@ -320,10 +320,10 @@ class ScanHistoryPage extends StatelessWidget {
               width: width * 0.30,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.greenAccent.withOpacity(0.2),
+                color: Colors.greenAccent.withValues(alpha: 0.2),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.greenAccent.withOpacity(0.4),
+                    color: Colors.greenAccent.withValues(alpha: 0.4),
                     blurRadius: 20,
                     spreadRadius: 5,
                   ),
@@ -404,12 +404,12 @@ class ScanHistoryPage extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: width * 0.025),
       decoration: BoxDecoration(
         color: selected
-            ? Colors.greenAccent.withOpacity(0.15)
+            ? Colors.greenAccent.withValues(alpha: 0.15)
             : const Color(0xff203a43),
         borderRadius: BorderRadius.circular(width * 0.045),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.35),
+            color: Colors.black.withValues(alpha: 0.35),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -417,7 +417,7 @@ class ScanHistoryPage extends StatelessWidget {
         border: Border.all(
           color: selected
               ? Colors.greenAccent
-              : Colors.white.withOpacity(0.05),
+              : Colors.white.withValues(alpha: 0.05),
           width: 1.2,
         ),
       ),
@@ -431,7 +431,7 @@ class ScanHistoryPage extends StatelessWidget {
             decoration: BoxDecoration(
               color: selected
                   ? Colors.greenAccent
-                  : Colors.greenAccent.withOpacity(0.5),
+                  : Colors.greenAccent.withValues(alpha: 0.5),
               borderRadius: const BorderRadius.horizontal(
                 left: Radius.circular(12),
               ),
@@ -442,7 +442,7 @@ class ScanHistoryPage extends StatelessWidget {
           // QR Icon
           Container(
             decoration: BoxDecoration(
-              color: Colors.greenAccent.withOpacity(0.15),
+              color: Colors.greenAccent.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(width * 0.03),
             ),
             padding: EdgeInsets.all(width * 0.025),
@@ -501,15 +501,15 @@ class ScanHistoryPage extends StatelessWidget {
                           ),
                           onPressed: () {
                             Clipboard.setData(ClipboardData(text: item));
-                            Get.snackbar(
-                              'Copied',
-                              'QR code text copied to clipboard',
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: Colors.black87,
-                              colorText: Colors.white,
-                              margin: EdgeInsets.all(width * 0.04),
-                              duration: const Duration(seconds: 2),
-                            );
+                            // Get.snackbar(
+                            //   'Copied',
+                            //   'QR code text copied to clipboard',
+                            //   snackPosition: SnackPosition.BOTTOM,
+                            //   backgroundColor: Colors.black87,
+                            //   colorText: Colors.white,
+                            //   margin: EdgeInsets.all(width * 0.04),
+                            //   duration: const Duration(seconds: 2),
+                            // );
                           },
                         ),
                         // Share

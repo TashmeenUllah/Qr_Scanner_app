@@ -11,7 +11,6 @@ class HomePage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
-
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -26,7 +25,7 @@ class HomePage extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.greenAccent.withOpacity(0.1),
+              color: Colors.greenAccent.withValues(alpha: 0.1),
               spreadRadius: 50,
               blurRadius: 100,
               offset: const Offset(0, 0),
@@ -59,28 +58,26 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: height * 0.02),
-
                 // Description
                 Text(
                   "Scan QR codes instantly or check your scan history.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                     fontSize: width * 0.045,
                   ),
                 ),
                 SizedBox(height: height * 0.06),
-
                 // Scanner Circle with glow
                 Container(
                   height: width * 0.35,
                   width: width * 0.35,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white.withOpacity(0.05),
+                    color: Colors.white.withValues(alpha: 0.05),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.greenAccent.withOpacity(0.3),
+                        color: Colors.greenAccent.withValues(alpha: 0.3),
                         spreadRadius: 10,
                         blurRadius: 30,
                         offset: const Offset(0, 0),
@@ -93,23 +90,20 @@ class HomePage extends StatelessWidget {
                     color: Colors.greenAccent,
                   ),
                 ),
-
-                SizedBox(height: height * 0.07),
-
+                SizedBox(height: height * 0.25),
                 // Scan Button
                 GradientButton(
-                  width: width,
                   icon: Icons.qr_code_scanner,
                   title: "Scan QR Code",
+                  width: width,
                   colors: [
-                    Colors.green.withOpacity(0.8),
-                   Colors.green.withOpacity(0.8),
+                   Colors.green.withValues(alpha: 0.8),
+                   Colors.green.withValues(alpha: 0.8),
                   ],
                   onTap: vm.navigateToScanner, // call ViewModel
                 ),
-
-                SizedBox(height: height * 0.025),
-
+                SizedBox(height: height * 0.024),
+                // SizedBox(height: height*0.025,),
                 // History Button
                 GradientButton(
                   width: width,
@@ -121,9 +115,7 @@ class HomePage extends StatelessWidget {
                   ],
                   onTap: vm.navigateToHistory, // call ViewModel
                 ),
-
-                const Spacer(),
-
+                const Spacer(),  
                 // Footer
                 Text(
                   "Powered by QR Scanner App",
@@ -140,3 +132,8 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+
+
+
+

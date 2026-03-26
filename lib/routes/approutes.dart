@@ -11,6 +11,7 @@ class AppRoutes {
   static  String scanHistory = '/scanhistory';
   static  String welcomeScreen = '/welcomescreen';
   // static  String scanHistory = '/scanhistory';
+  
    
   // GetX page list
   static List<GetPage> routes = [
