@@ -37,13 +37,20 @@ dependencies:
   get: ^4.6.5
   mobile_scanner: ^7.2.0
   get_storage: ^2.1.1
+  intl: ^0.20.2
+  share_plus: ^8.0.0  # Add this
+ 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_native_splash: ^2.4.7
-
-
+  flutter_launcher_icons: ^0.14.4
+  
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/Qrr.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -51,15 +58,23 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
 
+
+
+
 flutter_native_splash:
+  image: assets/images/Qrr.png   # 👈 ADD THIS
   color: "#ffffff"
   android: true
   ios: true
 
-# flutter_launcher_icons:
-#   android: true
-#   ios: true
-#   image_path: "assets/images/scan.png"
+  android_12:
+    image: assets/images/Qrr.png
+    icon_background_color: "#ffffff"
+
+
+
+
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

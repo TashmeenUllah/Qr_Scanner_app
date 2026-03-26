@@ -1,68 +1,15 @@
+
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
-// import 'package:qr_code_reader/views/home/home.dart';
-// import 'dart:math';
-
-// class WelcomeScreen extends StatefulWidget {
+// import 'package:qr_code_reader/viewmodels/splash_viewmodel.dart';
+// class WelcomeScreen extends StatelessWidget {
 //   const WelcomeScreen({super.key});
 
 //   @override
-//   State<WelcomeScreen> createState() => _WelcomeScreenState();
-// }
-
-// class _WelcomeScreenState extends State<WelcomeScreen>
-//     with SingleTickerProviderStateMixin {
-//   late final AnimationController _controller;
-//   late final Animation<double> _fadeAnimation;
-//   late final Animation<double> _logoScaleAnimation;
-//   late final Animation<double> _pulseAnimation;
-//   late final Animation<double> _floatingAnimation;
-
-//   final Random _random = Random();
-//   final List<Offset> _particles = List.generate(30, (_) => Offset(0, 0));
-
-// @override
-// void initState() {
-//   super.initState();
-
-//   _controller = AnimationController(
-//     vsync: this,
-//     duration: const Duration(seconds: 3),
-//   );
-
-//   _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
-//     CurvedAnimation(parent: _controller, curve: Curves.easeIn),
-//   );
-
-//   _logoScaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
-//     CurvedAnimation(parent: _controller, curve: Curves.elasticOut),
-//   );
-
-//   _pulseAnimation = Tween<double>(begin: 0.9, end: 1.15).animate(
-//     CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-//   );
-
-//   // Correct floating animation initialization
-//   _floatingAnimation = Tween<double>(begin: -8, end: 8).animate(
-//     CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-//   );
-
-//   _controller.repeat(reverse: true);
-// }
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-
-//   void navigateToScanner() {
-//     Get.off(() => const HomePage());
-//   }
-
-//   @override
 //   Widget build(BuildContext context) {
+//     final vm = Get.put(WelcomeViewModel());
 //     final size = MediaQuery.of(context).size;
-    
+
 //     return Scaffold(
 //       body: Stack(
 //         children: [
@@ -85,13 +32,13 @@
 
 //           // Particles floating behind logo
 //           AnimatedBuilder(
-//             animation: _controller,
+//             animation: vm.controller,
 //             builder: (context, _) {
 //               return CustomPaint(
 //                 size: size,
-//                 painter: _ParticlePainter(
-//                   particles: _particles,
-//                   animationValue: _controller.value,
+//                 painter: ParticlePainter(
+//                   particles: vm.particles,
+//                   animationValue: vm.controller.value,
 //                 ),
 //               );
 //             },
@@ -100,29 +47,29 @@
 //           // Center Content
 //           Center(
 //             child: FadeTransition(
-//               opacity: _fadeAnimation,
+//               opacity: vm.fadeAnimation,
 //               child: Column(
 //                 mainAxisSize: MainAxisSize.min,
 //                 children: [
 //                   ScaleTransition(
-//                     scale: _logoScaleAnimation,
+//                     scale: vm.logoScaleAnimation,
 //                     child: Stack(
 //                       alignment: Alignment.center,
 //                       children: [
 //                         // Glowing pulsing circle
 //                         ScaleTransition(
-//                           scale: _pulseAnimation,
+//                           scale: vm.pulseAnimation,
 //                           child: Container(
 //                             height: size.width * 0.5,
 //                             width: size.width * 0.5,
 //                             decoration: BoxDecoration(
-//                             shape: BoxShape.circle,
-//                             color: Colors.greenAccent.withOpacity(0.25),
-//                             boxShadow: [
-//                               BoxShadow(
-//                               color: Colors.greenAccent.withOpacity(0.3),
-//                               blurRadius: 50,
-//                               spreadRadius: 10,
+//                               shape: BoxShape.circle,
+//                               color: Colors.greenAccent.withOpacity(0.25),
+//                               boxShadow: [
+//                                 BoxShadow(
+//                                   color: Colors.greenAccent.withOpacity(0.3),
+//                                   blurRadius: 50,
+//                                   spreadRadius: 10,
 //                                 ),
 //                               ],
 //                             ),
@@ -130,7 +77,7 @@
 //                         ),
 //                         // Floating logo
 //                         Transform.translate(
-//                           offset: Offset(0, _floatingAnimation.value),
+//                           offset: Offset(0, vm.floatingAnimation.value),
 //                           child: Container(
 //                             height: size.width * 0.35,
 //                             width: size.width * 0.35,
@@ -155,6 +102,7 @@
 //                       ],
 //                     ),
 //                   ),
+
 //                   const SizedBox(height: 25),
 //                   const Text(
 //                     'QR Scanner',
@@ -184,7 +132,7 @@
 //                   ),
 //                   const SizedBox(height: 50),
 //                   ElevatedButton(
-//                     onPressed: navigateToScanner,
+//                     onPressed: vm.navigateToScanner,
 //                     style: ElevatedButton.styleFrom(
 //                       padding: const EdgeInsets.symmetric(
 //                           vertical: 16, horizontal: 65),
@@ -215,32 +163,11 @@
 //   }
 // }
 
-// // Particle painter for background motion effect
-// class _ParticlePainter extends CustomPainter {
-//   final List<Offset> particles;
-//   final double animationValue;
-
-//   _ParticlePainter({required this.particles, required this.animationValue});
-
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final paint = Paint()..color = Colors.greenAccent.withOpacity(0.2);
-//     for (final p in particles) {
-//       final x = p.dx * size.width + sin(animationValue * 2 * pi) * 20;
-//       final y = p.dy * size.height + cos(animationValue * 2 * pi) * 20;
-//       canvas.drawCircle(Offset(x, y), 4, paint);
-//     }
-//   }
-
-//   @override
-//   bool shouldRepaint(covariant _ParticlePainter oldDelegate) => true;
-// }
 
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_reader/viewmodels/splash_viewmodel.dart';
-
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -251,107 +178,70 @@ class WelcomeScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: const Color(0xff203a43), // ✅ your app color
       body: Stack(
         children: [
-          // Animated Gradient Background
+          // Optional subtle gradient for depth
           AnimatedContainer(
             duration: const Duration(seconds: 6),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Colors.blueGrey.shade900,
-                  Colors.blueGrey.shade700,
-                  Colors.black87,
-                  Colors.green.shade900,
+                  const Color(0xff203a43),
+                  Colors.blueGrey.shade900.withOpacity(0.9),
                 ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
             ),
           ),
 
-          // Particles floating behind logo
-          AnimatedBuilder(
-            animation: vm.controller,
-            builder: (context, _) {
-              return CustomPaint(
-                size: size,
-                painter: ParticlePainter(
-                  particles: vm.particles,
-                  animationValue: vm.controller.value,
-                ),
-              );
-            },
-          ),
-
-          // Center Content
+          // Center content
           Center(
             child: FadeTransition(
               opacity: vm.fadeAnimation,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ScaleTransition(
-                    scale: vm.logoScaleAnimation,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        // Glowing pulsing circle
-                        ScaleTransition(
-                          scale: vm.pulseAnimation,
-                          child: Container(
-                            height: size.width * 0.5,
-                            width: size.width * 0.5,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.greenAccent.withOpacity(0.25),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.greenAccent.withOpacity(0.3),
-                                  blurRadius: 50,
-                                  spreadRadius: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        // Floating logo
-                        Transform.translate(
-                          offset: Offset(0, vm.floatingAnimation.value),
-                          child: Container(
-                            height: size.width * 0.35,
-                            width: size.width * 0.35,
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.greenAccent.withOpacity(0.5),
-                                  blurRadius: 30,
-                                  offset: const Offset(0, 10),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.qr_code_2,
-                              color: Colors.white,
-                              size: 80,
-                            ),
-                          ),
+                  // Modern floating logo card
+                  Container(
+                    height: size.width * 0.4,
+                    width: size.width * 0.4,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff203a43), // match background
+                      borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.6),
+                          blurRadius: 25,
+                          offset: const Offset(0, 15),
                         ),
                       ],
+                      border: Border.all(
+                        color: Colors.greenAccent,
+                        width: 2,
+                      ),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.qr_code_2,
+                        size: 80,
+                        color: Colors.greenAccent,
+                      ),
                     ),
                   ),
 
-                  const SizedBox(height: 25),
-                  const Text(
+                  const SizedBox(height: 30),
+
+                  // App title
+                  Text(
                     'QR Scanner',
                     style: TextStyle(
-                      color: Colors.greenAccent,
-                      fontSize: 38,
+                      fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 1.5,
-                      shadows: [
+                      color: Colors.greenAccent.withOpacity(0.8),
+                      letterSpacing: 1.2,
+                      shadows: const [
                         Shadow(
                           color: Colors.black45,
                           blurRadius: 4,
@@ -361,35 +251,37 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
+
+                  // Subtitle
                   const Text(
-                    'Scan and manage your QR codes easily',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    'Smart, fast, and effortless QR management',
                     textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.white,
+                    ),
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 40),
+
+                  // Start button (modern)
                   ElevatedButton(
                     onPressed: vm.navigateToScanner,
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 65),
-                      backgroundColor: Colors.greenAccent,
+                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 60),
+                      backgroundColor: Colors.greenAccent.withOpacity(0.8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(35),
                       ),
-                      elevation: 15,
-                      shadowColor: Colors.greenAccent.withOpacity(0.6),
+                      elevation: 10,
+                      shadowColor: Colors.greenAccent.withOpacity(0.8),
                     ),
                     child: const Text(
                       'Start Scanning',
                       style: TextStyle(
+                        fontSize: 18,
+                        // fontWeight: FontWeight.bold,
+                        letterSpacing: 1.1,
                         color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
                       ),
                     ),
                   ),
@@ -402,4 +294,3 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
-

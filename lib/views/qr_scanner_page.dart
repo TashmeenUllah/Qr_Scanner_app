@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:qr_code_reader/views/components/DailogWidget.dart';
 import 'package:qr_code_reader/views/scanhistory/controller/controller.dart';
 
 
@@ -17,6 +18,7 @@ class _QRScannerPageState extends State<QRScannerPage>
   final MobileScannerController scannerController = MobileScannerController();
   late final AnimationController _animationController;
   late final Animation<double> _laserAnimation;
+  late Worker _dialogWorker;
 
   @override
   // void initState() {
@@ -52,6 +54,25 @@ void initState() {
     begin: 0,
     end: 1,
   ).animate(_animationController);
+
+  // ✅ SAFE LISTENER
+  _dialogWorker = ever(controller.hasResult, (bool hasResult) {
+    if (hasResult) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => QRResultDialog(
+            result: controller.qrText.value,
+            onClose: () {
+              controller.hasResult.value = false;
+              Navigator.pop(context);
+            },
+          ),
+        );
+      });
+    }
+  });
 
   // Listen to scanning state
   ever(controller.isScanning, (bool scanning) {
@@ -170,8 +191,7 @@ Align(
     // Hide the bottom panel or change text when dialog is open
     if (controller.hasResult.value) {
       return SizedBox.shrink(); // completely hide
-      // OR show neutral text:
-      // return Container(height: bottomPanelHeight);
+    
     }
 
     return Container(
@@ -204,7 +224,9 @@ Align(
       ),
     );
   }),
+  
 ),
+
         ],
       ),
     );
