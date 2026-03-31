@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:qr_code_reader/views/scanhistory/scanhistory.dart';
 class HomeViewModel extends GetxController {
 
   void navigateToScanner() {
@@ -6,6 +7,7 @@ class HomeViewModel extends GetxController {
   }
 
   void navigateToHistory() {
-    Get.toNamed('/scanhistory');
+    // Get.toNamed('/scanhistory');
+      Get.to(() => ScanHistoryPage()); // this adds on top
   }
 }

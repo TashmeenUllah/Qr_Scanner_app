@@ -62,7 +62,7 @@ flutter_launcher_icons:
 
 
 flutter_native_splash:
-  image: assets/images/Qrr.png   # 👈 ADD THIS
+  image: assets/images/Qrr.png   
   color: "#ffffff"
   android: true
   ios: true

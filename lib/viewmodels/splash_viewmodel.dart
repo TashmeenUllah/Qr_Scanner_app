@@ -44,7 +44,7 @@ class WelcomeViewModel extends GetxController
   }
 
   void navigateToScanner() {
-    Get.off(() => const HomePage());
+    Get.offAll(() => HomePage()); // removes all previous routes
   }
 
   @override

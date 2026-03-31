@@ -6,7 +6,6 @@ class QRResultDialog extends StatelessWidget {
   final VoidCallback onClose;
 
   const QRResultDialog({super.key, required this.result, required this.onClose});
-
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -81,8 +80,6 @@ class QRResultDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-
-              // Buttons
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
